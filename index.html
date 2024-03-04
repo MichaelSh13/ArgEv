@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Authentication Demo</title>
+  <!-- Firebase scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <!-- Replace these with your Firebase project configuration -->
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyATaDtC3ZzKGOBYbmxMz7lG1I_TkabsnAY",
+        authDomain: "localhost",
+        databaseURL: "https://argev-3af51-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "argev-3af51",
+        storageBucket: "argev-3af51.appspot.com",
+        messagingSenderId: "865523070346",
+        appId: "1:865523070346:web:ad0be412f0d62f90ad4473",
+        measurementId: "G-0F5MG2LBG9"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 50px;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <label for="email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" id="email" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" required>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <script>
+    function login() {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log(user);
+        // You can redirect the user to another page upon successful login
+        // window.location.href = "dashboard.html";
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.error(errorMessage);
+        // Handle errors here, e.g., display error message to the user
+      });
+    }
+  </script>
+</body>
+</html>
